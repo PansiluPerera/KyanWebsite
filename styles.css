@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #64bab2;
+    text-align: center;
+    position: relative;
+}
+
+.splash-screen {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #64bab2;
+    transition: opacity 2s ease-in-out;
+}
+
+.windows-loading {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #f2f0ef; 
+    border-radius: 50%;
+    animation: dotAnim 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.dot:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.dot:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+@keyframes dotAnim {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+.main-content {
+    display: block;
+    position: relative;
+    z-index: 3; /* On top of video */
+    color: white;
+    opacity: 0; /* Start fully transparent */
+    animation: fadeInMain 2s ease forwards; /* Fade-in effect */
+    animation-delay: 2s; /* Starts after the splash screen fade-out */
+}
+
+.project-title, .coming-soon, .team-text, .team-details {
+    opacity: 0; /* Start hidden */
+    animation: fadeInText 1s ease forwards; /* Text fade-in animation */
+}
+.project-title {
+    animation-delay: 1s; 
+    color: #64bab2; 
+}
+
+.coming-soon {
+    animation-delay: 2s; 
+    color: #f2f0ef; 
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; 
+    transition: all 0.1s ease;
+}
+
+.team-text, .team-details {
+    animation-delay: 3s; 
+    color: #f2f0ef; 
+    padding-top: 30px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.main-content h1, .main-content h2 {
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-content h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #f2f0ef; 
+}
+.main-content h2 {
+    letter-spacing: 6px;
+    font-size: 2.2rem;
+    color: white;
+    margin-bottom: 60px;
+
+}
+
+.bottom-text {
+    margin-top: 100px; 
+    color: #f2f0ef;
+    position: relative;
+    top: 75%;
+}
+
+.splash-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.splash-screen.fade-out + .main-content {
+    display: block;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+
+.splash-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 60%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Position video behind the main content */
+    display: none; /* Hide video initially */
+}
+
+.main-content {
+    display: none; /* Initially hidden until splash fades */
+    position: relative;
+    z-index: 3; /* On top of video */
+    color: white;
+}
+
+
+.project-title {
+    animation-delay: 2s; /* Delays for each element for sequential effect */
+}
+
+.coming-soon {
+    animation-delay: 3s;
+}
+
+.team-text {
+    animation-delay: 4s;
+}
+
+.team-details {
+    animation-delay: 5s;
+}
+
+/* Keyframes for fade-in animations */
+@keyframes fadeInMain {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeInText {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+@media (max-width: 768px) {
+    /* Smaller font and element adjustments for mobile */
+    .project-title {
+        font-size: 1.5rem;
+    }
+
+    .coming-soon {
+        font-size: 2.5rem;
+    }
+
+    .team-text, .team-details {
+        font-size: 0.9rem;
+    }
+
+    .windows-loading {
+        width: 40px;
+        height: 40px;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* Padding and margins adjustments for mobile */
+    .main-content {
+        padding: 20px;
+    }
+
+    .bottom-text {
+        margin-top: 30px;
+    }
+}
