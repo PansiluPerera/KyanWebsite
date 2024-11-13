@@ -215,8 +215,8 @@ body, html {
 }
 
 
-@media (max-width: 768px) {
-    /* Smaller font and element adjustments for mobile */
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
     .project-title {
         font-size: 1.5rem;
     }
@@ -246,5 +246,107 @@ body, html {
 
     .bottom-text {
         margin-top: 30px;
+    }
+}
+
+/* Tablet (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .project-title {
+        font-size: 1.8rem;
+    }
+
+    .coming-soon {
+        font-size: 3rem;
+    }
+
+    .team-text, .team-details {
+        font-size: 1rem;
+    }
+
+    .windows-loading {
+        width: 45px;
+        height: 45px;
+    }
+
+    .dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    /* Slightly larger text size for tablet screens */
+    .main-content {
+        padding: 30px;
+    }
+
+    .bottom-text {
+        margin-top: 40px;
+    }
+}
+
+/* Laptop (1025px to 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .project-title {
+        font-size: 2.2rem;
+    }
+
+    .coming-soon {
+        font-size: 3.5rem;
+    }
+
+    .team-text, .team-details {
+        font-size: 1.1rem;
+    }
+
+    .windows-loading {
+        width: 50px;
+        height: 50px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    /* Adjust layout for larger screens */
+    .main-content {
+        padding: 40px;
+    }
+
+    .bottom-text {
+        margin-top: 50px;
+    }
+}
+
+/* Large Laptop/Desktop (1367px and above) */
+@media (min-width: 1367px) {
+    .project-title {
+        font-size: 2.5rem;
+    }
+
+    .coming-soon {
+        font-size: 4rem;
+    }
+
+    .team-text, .team-details {
+        font-size: 1.2rem;
+    }
+
+    .windows-loading {
+        width: 60px;
+        height: 60px;
+    }
+
+    .dot {
+        width: 9px;
+        height: 9px;
+    }
+
+    /* Larger padding for big screens */
+    .main-content {
+        padding: 50px;
+    }
+
+    .bottom-text {
+        margin-top: 60px;
     }
 }
