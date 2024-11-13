@@ -1,121 +1,54 @@
-:root {
-    --primary-color: #64bab2;
-    --text-color: #f2f0ef;
-    --animation-duration: 2s;
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
     font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-    background-color: var(--primary-color);
-    overflow: hidden;
 }
 
-.container {
-    width: 100%;
-    min-height: 100vh;
+body, html {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    flex-direction: column;
+    background-color: #64bab2;
+    text-align: center;
+    position: relative;
+    margin: 0;
+    overflow: hidden; /* Prevents page scroll */
 }
 
-/* Splash Screen */
+/* Splash screen */
 .splash-screen {
-    position: fixed;
-    inset: 0;
-    background-color: var(--primary-color);
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    transition: opacity var(--animation-duration) ease-in-out;
+    height: 100%;
+    width: 100%;
+    background-color: #64bab2;
+    transition: opacity 2s ease-in-out;
+    z-index: 2; /* Ensure splash is above other content */
 }
 
 .windows-loading {
     display: flex;
-    gap: 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 12vw;
+    height: 12vw;
 }
 
 .dot {
-    width: clamp(6px, 1vw, 10px);
-    height: clamp(6px, 1vw, 10px);
-    background-color: var(--text-color);
+    width: 2vw;
+    height: 2vw;
+    background-color: #f2f0ef;
     border-radius: 50%;
     animation: dotAnim 1.5s infinite ease-in-out;
 }
 
-.dot:nth-child(2) { animation-delay: 0.3s; }
-.dot:nth-child(3) { animation-delay: 0.6s; }
-.dot:nth-child(4) { animation-delay: 0.9s; }
-.dot:nth-child(5) { animation-delay: 1.2s; }
-
-/* Video Background */
-.background-video {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    opacity: 0.6;
-    display: none;
-}
-
-/* Main Content */
-.main-content {
-    display: none;
-    text-align: center;
-    z-index: 2;
-    position: relative;
-}
-
-.project-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    color: var(--text-color);
-    letter-spacing: 0.2em;
-    margin-bottom: clamp(1rem, 4vh, 3rem);
-    opacity: 0;
-    animation: fadeIn var(--animation-duration) ease forwards;
-    animation-delay: 2s;
-}
-
-.coming-soon {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    color: var(--text-color);
-    margin-bottom: clamp(2rem, 6vh, 4rem);
-    opacity: 0;
-    animation: fadeIn var(--animation-duration) ease forwards;
-    animation-delay: 2.5s;
-}
-
-.bottom-text {
-    opacity: 0;
-    animation: fadeIn var(--animation-duration) ease forwards;
-    animation-delay: 3s;
-}
-
-.team-text {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: var(--text-color);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.team-details {
-    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-    color: var(--text-color);
-}
-
-/* Animations */
 @keyframes dotAnim {
-    0%, 100% {
+    0% {
         transform: scale(0);
         opacity: 0;
     }
@@ -123,15 +56,151 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* Main content */
+.main-content {
+    visibility: hidden; /* Initially hidden */
+    position: relative;
+    z-index: 1; /* Ensure content appears above splash screen */
+    color: white;
 }
 
-.fade-out {
+.project-title, .coming-soon, .team-text, .team-details {
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    animation: fadeInText 1s ease forwards;
+}
+
+.project-title {
+    animation-delay: 1s;
+    color: #f2f0ef;
+    letter-spacing: 0.5rem;
+    font-size: 2.5rem; /* Adjusted size */
+}
+
+.coming-soon {
+    animation-delay: 2s;
+    color: #f2f0ef;
+    font-size: 5rem; /* Adjusted size */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.team-text, .team-details {
+    animation-delay: 3s;
+    color: #f2f0ef;
+    padding-top: 30px;
+    font-weight: bolder;
+    font-size: 1.5rem; /* Adjusted size */
+}
+
+.bottom-text {
+    margin-top: 75px;
+    color: #f2f0ef;
+    position: relative;
+    top: 75%;
+}
+
+/* Keyframes for fade-in animations */
+@keyframes fadeInText {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Media Queries for screen widths */
+
+/* For screens smaller than 1200px */
+@media (max-width: 1200px) {
+    .windows-loading {
+        width: 15vw;
+        height: 15vw;
+    }
+    .dot {
+        width: 3vw;
+        height: 3vw;
+    }
+    .project-title {
+        font-size: 2.2rem; /* Slightly reduced size */
+    }
+    .coming-soon {
+        font-size: 3.5rem; /* Slightly reduced size */
+    }
+    .team-text, .team-details {
+        font-size: 1.4rem; /* Slightly reduced size */
+    }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    .windows-loading {
+        width: 18vw;
+        height: 18vw;
+    }
+    .dot {
+        width: 4vw;
+        height: 4vw;
+    }
+    .project-title {
+        font-size: 2rem; /* Slightly reduced size */
+    }
+    .coming-soon {
+        font-size: 3rem; /* Slightly reduced size */
+    }
+    .team-text, .team-details {
+        font-size: 1.3rem; /* Slightly reduced size */
+    }
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+    .windows-loading {
+        width: 22vw;
+        height: 22vw;
+    }
+    .dot {
+        width: 4.5vw;
+        height: 4.5vw;
+    }
+    .project-title {
+        font-size: 1.8rem; /* Slightly reduced size */
+    }
+    .coming-soon {
+        font-size: 2.8rem; /* Slightly reduced size */
+    }
+    .team-text, .team-details {
+        font-size: 1.2rem; /* Slightly reduced size */
+    }
+}
+
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Position video behind the main content */
+    display: none; /* Hide video initially */
+    opacity: 70%;
+}
+
+
+/* Splash Screen and Main Content when body is loaded */
+body.loaded .splash-screen {
+    display: none; /* Hide splash screen */
+}
+
+body.loaded .main-content {
+    opacity: 1; /* Show main content */
+    visibility: visible; /* Ensure it's visible */
 }

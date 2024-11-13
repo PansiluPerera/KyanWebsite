@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coming Soon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Splash Screen -->
     <div class="splash-screen">
         <div class="windows-loading">
             <div class="dot"></div>
@@ -17,22 +18,40 @@
             <div class="dot"></div>
         </div>
     </div>
-
-    <video class="background-video" autoplay muted loop playsinline>
+    
+    <!-- Video Background -->
+    <video class="background-video" autoplay muted loop>
         <source src="background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
 
-    <div class="container">
-        <main class="main-content">
-            <h2 class="project-title">Project Kyan</h2>
-            <h1 class="coming-soon">Coming Soon</h1>
-            <div class="bottom-text">
-                <p class="team-text">Team RASPBerry</p>
-                <p class="team-details">A Software Development Group Project done by SE - 07</p>
-            </div>
-        </main>
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="project-title">Project Kyan</h2>
+        <h1 class="coming-soon">Coming Soon</h1>
+        <div class="bottom-text">
+            <p class="team-text">Team RASPBerry</p>
+            <p class="team-details">A Software Development Group Project done by SE - 07</p>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+       window.addEventListener('DOMContentLoaded', () => {
+        // Splash Screen fade out after 2 seconds
+            setTimeout(() => {
+                // Fade out the splash screen
+                document.querySelector('.splash-screen').classList.add('fade-out');
+                
+                // Make the main content visible
+                document.querySelector('.main-content').style.visibility = 'visible';
+
+                // Make the background video visible
+                document.querySelector('.background-video').style.display = 'block';
+
+                // Add the 'loaded' class to the body to trigger CSS changes
+                document.body.classList.add('loaded');
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
