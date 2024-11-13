@@ -1,70 +1,121 @@
+:root {
+    --primary-color: #64bab2;
+    --text-color: #f2f0ef;
+    --animation-duration: 2s;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif; 
 }
 
-body, html {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #64bab2;
-    text-align: center;
-    position: relative;
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background-color: var(--primary-color);
+    overflow: hidden;
 }
 
-.splash-screen {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.container {
     width: 100%;
-    background-color: #64bab2;
-    transition: opacity 2s ease-in-out;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Splash Screen */
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity var(--animation-duration) ease-in-out;
 }
 
 .windows-loading {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 60px;
-    height: 60px;
+    gap: 0.5rem;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    background-color: #f2f0ef; 
+    width: clamp(6px, 1vw, 10px);
+    height: clamp(6px, 1vw, 10px);
+    background-color: var(--text-color);
     border-radius: 50%;
     animation: dotAnim 1.5s infinite ease-in-out;
 }
 
-.dot:nth-child(1) {
-    animation-delay: 0s;
+.dot:nth-child(2) { animation-delay: 0.3s; }
+.dot:nth-child(3) { animation-delay: 0.6s; }
+.dot:nth-child(4) { animation-delay: 0.9s; }
+.dot:nth-child(5) { animation-delay: 1.2s; }
+
+/* Video Background */
+.background-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.6;
+    display: none;
 }
 
-.dot:nth-child(2) {
-    animation-delay: 0.3s;
+/* Main Content */
+.main-content {
+    display: none;
+    text-align: center;
+    z-index: 2;
+    position: relative;
 }
 
-.dot:nth-child(3) {
-    animation-delay: 0.6s;
+.project-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-color);
+    letter-spacing: 0.2em;
+    margin-bottom: clamp(1rem, 4vh, 3rem);
+    opacity: 0;
+    animation: fadeIn var(--animation-duration) ease forwards;
+    animation-delay: 2s;
 }
 
-.dot:nth-child(4) {
-    animation-delay: 0.9s;
+.coming-soon {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--text-color);
+    margin-bottom: clamp(2rem, 6vh, 4rem);
+    opacity: 0;
+    animation: fadeIn var(--animation-duration) ease forwards;
+    animation-delay: 2.5s;
 }
 
-.dot:nth-child(5) {
-    animation-delay: 1.2s;
+.bottom-text {
+    opacity: 0;
+    animation: fadeIn var(--animation-duration) ease forwards;
+    animation-delay: 3s;
 }
 
+.team-text {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.team-details {
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    color: var(--text-color);
+}
+
+/* Animations */
 @keyframes dotAnim {
-    0% {
+    0%, 100% {
         transform: scale(0);
         opacity: 0;
     }
@@ -72,281 +123,15 @@ body, html {
         transform: scale(1);
         opacity: 1;
     }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-
-.main-content {
-    display: block;
-    position: relative;
-    z-index: 3; /* On top of video */
-    color: white;
-    opacity: 0; /* Start fully transparent */
-    animation: fadeInMain 2s ease forwards; /* Fade-in effect */
-    animation-delay: 2s; /* Starts after the splash screen fade-out */
-}
-
-.project-title, .coming-soon, .team-text, .team-details {
-    opacity: 0; /* Start hidden */
-    animation: fadeInText 1s ease forwards; /* Text fade-in animation */
-}
-.project-title {
-    animation-delay: 1s; 
-    color: #64bab2; 
-}
-
-.coming-soon {
-    animation-delay: 2s; 
-    color: #f2f0ef; 
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap; 
-    transition: all 0.1s ease;
-}
-
-.team-text, .team-details {
-    animation-delay: 3s; 
-    color: #f2f0ef; 
-    padding-top: 30px;
-    font-weight: bolder;
-    font-size: 20px;
-}
-
-.main-content h1, .main-content h2 {
-    font-family: 'Poppins', sans-serif;
-}
-
-.main-content h1 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    color: #f2f0ef; 
-}
-.main-content h2 {
-    letter-spacing: 6px;
-    font-size: 2.2rem;
-    color: white;
-    margin-bottom: 60px;
-
-}
-
-.bottom-text {
-    margin-top: 75px; 
-    color: #f2f0ef;
-    position: relative;
-    top: 75%;
-}
-
-.splash-screen.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.splash-screen.fade-out + .main-content {
-    display: block;
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-
-
-.splash-screen.fade-out {
+.fade-out {
     opacity: 0;
     visibility: hidden;
-}
-
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 60%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1; /* Position video behind the main content */
-    display: none; /* Hide video initially */
-}
-
-.main-content {
-    display: none; /* Initially hidden until splash fades */
-    position: relative;
-    z-index: 3; /* On top of video */
-    color: white;
-}
-
-
-.project-title {
-    animation-delay: 2s; /* Delays for each element for sequential effect */
-}
-
-.coming-soon {
-    animation-delay: 3s;
-}
-
-.team-text {
-    animation-delay: 4s;
-}
-
-.team-details {
-    animation-delay: 5s;
-}
-
-/* Keyframes for fade-in animations */
-@keyframes fadeInMain {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes fadeInText {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-
-/* Mobile (up to 767px) */
-@media (max-width: 767px) {
-    .project-title {
-        font-size: 1.5rem;
-    }
-
-    .coming-soon {
-        font-size: 2.5rem;
-    }
-
-    .team-text, .team-details {
-        font-size: 0.9rem;
-    }
-
-    .windows-loading {
-        width: 40px;
-        height: 40px;
-    }
-
-    .dot {
-        width: 6px;
-        height: 6px;
-    }
-
-    /* Padding and margins adjustments for mobile */
-    .main-content {
-        padding: 20px;
-    }
-
-    .bottom-text {
-        margin-top: 30px;
-    }
-}
-
-/* Tablet (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .project-title {
-        font-size: 1.8rem;
-    }
-
-    .coming-soon {
-        font-size: 3rem;
-    }
-
-    .team-text, .team-details {
-        font-size: 1rem;
-    }
-
-    .windows-loading {
-        width: 45px;
-        height: 45px;
-    }
-
-    .dot {
-        width: 7px;
-        height: 7px;
-    }
-
-    /* Slightly larger text size for tablet screens */
-    .main-content {
-        padding: 30px;
-    }
-
-    .bottom-text {
-        margin-top: 40px;
-    }
-}
-
-/* Laptop (1025px to 1366px) */
-@media (min-width: 1025px) and (max-width: 1366px) {
-    .project-title {
-        font-size: 2.2rem;
-    }
-
-    .coming-soon {
-        font-size: 3.5rem;
-    }
-
-    .team-text, .team-details {
-        font-size: 1.1rem;
-    }
-
-    .windows-loading {
-        width: 50px;
-        height: 50px;
-    }
-
-    .dot {
-        width: 8px;
-        height: 8px;
-    }
-
-    /* Adjust layout for larger screens */
-    .main-content {
-        padding: 40px;
-    }
-
-    .bottom-text {
-        margin-top: 50px;
-    }
-}
-
-/* Large Laptop/Desktop (1367px and above) */
-@media (min-width: 1367px) {
-    .project-title {
-        font-size: 2.5rem;
-    }
-
-    .coming-soon {
-        font-size: 4rem;
-    }
-
-    .team-text, .team-details {
-        font-size: 1.2rem;
-    }
-
-    .windows-loading {
-        width: 60px;
-        height: 60px;
-    }
-
-    .dot {
-        width: 9px;
-        height: 9px;
-    }
-
-    /* Larger padding for big screens */
-    .main-content {
-        padding: 50px;
-    }
-
-    .bottom-text {
-        margin-top: 60px;
-    }
+    pointer-events: none;
 }
